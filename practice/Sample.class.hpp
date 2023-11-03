@@ -8,16 +8,36 @@
  * ~Sample is desconstructor.
  * Constuctor of instances, descontructor of instances
  */
+// class Sample {
+
+// public:
+
+// 	int	foo;
+
+// 	Sample(void);
+// 	~Sample(void);
+
+// 	void bar(void);
+// };
+
+// #endif
+
+
+/**
+ * @brief const keyword after argument, you are telling the compiler
+ * this will not alter the constance 
+ */
 class Sample {
 
 public:
 
-	int	foo;
+	float const	const_value;
+	int			qd;
 
-	Sample(void);
+	Sample( float const f );
 	~Sample(void);
 
-	void bar(void);
+	void bar(void) const;
 };
 
 #endif
