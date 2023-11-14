@@ -51,15 +51,43 @@
 
 int main(void)
 {
-	int width (0);
-	int length (0);
+	// int width (0);
+	// int length (0);
 
-	std::cout << "Enter width: ";
-	std::cin >> width;
-	std::cout << "Enter length: ";
-	std::cin >> length;
+	std::cout << "Hello welcome to Carpmet cleaning service" << std::endl;
+	std::cout << "\nHow many small rooms would you like clearned? ";
+	int num_small_rooms (0);
+	std::cin >> num_small_rooms;
+	std::cout << "\nHow many large rooms would you like clearned? ";
 
-	std::cout << "The area is " << width * length << " square feet" << std::endl;
+	int num_large_rooms (0);
+	std::cin >> num_large_rooms;
+	const double price_small (25);
+	const double price_large (35);
+	const double sales_tax (0.06);
+	const int estimate_expiry(30);
+
+	std::cout << "nEstimate for carpet cleaning services" << std::endl;
+	std::cout << "Number of small rooms : " << num_small_rooms << std::endl;
+	std::cout << "Number of large rooms : " << num_large_rooms << std::endl;
+	std::cout << "Price per small rooom : $" << price_small << std::endl;
+	std::cout << "Price per large rooom : $" << price_large << std::endl;
+	std::cout << "Cost :$" << (price_small * num_small_rooms) + (price_large * num_large_rooms) << std::endl;
+	std::cout << "TAX : $" << ((price_small * num_small_rooms) + (price_large * num_large_rooms)) * sales_tax << std::endl;
+
+	std::cout << "========================================" << std::endl;
+	std::cout << "Total estimate: $" << (price_small * num_small_rooms) + (price_large * num_large_rooms) + ((price_small * num_small_rooms) + (price_large * num_large_rooms)) * sales_tax << std::endl;
+	std::cout << "This estimate is valid for " << estimate_expiry << " days" << std::endl;
+
+	std::cout << std::endl;
+
+
+	// std::cout << "Enter width: ";
+	// std::cin >> width;
+	// std::cout << "Enter length: ";
+	// std::cin >> length;
+
+	// std::cout << "The area is " << width * length << " square feet" << std::endl;
 
 	return 0;
 
