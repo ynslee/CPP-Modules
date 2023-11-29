@@ -29,6 +29,8 @@ class PhoneBook
   public:
 	PhoneBook();
 	~PhoneBook();
+
+	void	openPhoneBook(std::string content);
 };
 
 #endif

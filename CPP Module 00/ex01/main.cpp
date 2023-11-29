@@ -13,6 +13,10 @@ int main()
 	while (54)
 	{
 		std::getline (std::cin, content, '\n');
-		if (std::content)
+		if (std::cin.eof() == 1)
+			exit(0);
+		if (content.empty())
+			std::cout << "please type ADD, SEARCH, or EXIT as command!" << std::endl;
+		
 	}
 }
