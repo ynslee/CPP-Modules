@@ -20,11 +20,10 @@ class PhoneBook
   private:
 	int			_index;
 	int			_count;
-	Contact		_record[MAXIMUM_SIZE];
+	Contact		_contacts[MAXIMUM_SIZE];
 	Contact*	_findContact();
 	void		_addContact();
 	void		_searchIndex() const;
-	int			_getTotal();
 
   public:
 	PhoneBook();
