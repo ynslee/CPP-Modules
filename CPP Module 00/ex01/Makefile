@@ -1,6 +1,6 @@
 NAME = phonebook
 FLAGS = -std=c++98 -Wall -Wextra -Werror
-SRCS = Contact.cpp main.cpp
+SRCS = Contact.cpp PhoneBook.cpp main.cpp
 OBJ = $(SRCS:.cpp=.o)
 
 .PHONY: all clean fclean re

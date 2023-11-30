@@ -19,7 +19,7 @@ class PhoneBook
 {
   private:
 	int			_index;
-	int			_count;
+	int			_contactCount;
 	Contact		_contacts[MAXIMUM_SIZE];
 	Contact*	_findContact();
 	void		_addContact();
