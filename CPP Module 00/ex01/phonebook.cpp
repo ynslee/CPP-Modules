@@ -1,6 +1,7 @@
 #include "PhoneBook.hpp"
 #include <string> //compare
 #include <iomanip> //setw
+#include <sstream> //ss
 
 PhoneBook::PhoneBook() : _index(-1), _contactCount(0) {};
 PhoneBook::~PhoneBook() {
@@ -21,7 +22,7 @@ static std::string put_content()
 			std::cout << "reached the end of file!" << std::endl;
 			std::exit(0);
 		}
-		if (_input.empty() == 0)
+		if (!_input.empty())
 			return (_input);
 		else
 			std::cout << "Invalid input!" << std::endl;
@@ -104,27 +105,51 @@ static void put_column(Contact _contacts, int index)
 
 void	PhoneBook::_searchIndex() const
 {
-	std::string content;
+	std::string 		content;
+	int i;
 
 	if (this->_contactCount == 0)
 		std::cout << "There is nothing in the phonebook yet!" << std::endl;
 	else
 	{
 		set_column();
-		for (int i = 0; i < this->_contactCount; i++)
+		for (i = 0; i < this->_contactCount; i++)
 			put_column(this->_contacts[i], i);
-		content = put_content();
-		int i = std::stoi(content);
+		while (42)
+		{
+			content = put_content();
+			std::stringstream ss(content);
+			ss >> i;
+			int number;
+			number = i;
+			std::stringstream check;
+			check << number;
+			std::string str = check.str();
+			int result = content.compare(str);
+			if (!result && !ss.fail() && i >= 0 && i < this->_contactCount)
+				break ;
+			else
+				std::cout << "\nPlease enter a valid index : 0 - " << this->_contactCount - 1 << std::endl;
+		}
 		if (i >= 0 && i < this->_contactCount)
 		{
 			std::cout << std::endl;
+			std::cout << "------------ Chosen contact" << std::endl;
 			std::cout << "Phone book index is: " << i << std::endl;
 			std::cout << "First name: " << this->_contacts[i].getFirstName() << std::endl;
 			std::cout << "Last name: " << this->_contacts[i].getLastName() << std::endl;
 			std::cout << "Nick name: " << this->_contacts[i].getNickName() << std::endl;
 			std::cout << "Phone number: " << this->_contacts[i].getNumber() << std::endl;
-			std::cout << " ** Darkest Secret ** :" << this->_contacts[i].getSecret() << std::endl;
-			return ;
+			std::cout << " ** Darkest Secret ** : " << this->_contacts[i].getSecret() << "\n\n" << std::endl;
+				while (42)
+			{
+				std::cout << "\n----------please enter to return";
+				std::getline(std::cin, content, '\n');
+				if (content.empty())
+					return ;
+				else
+					continue;
+			}
 		}
 		else
 		{
