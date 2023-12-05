@@ -1,12 +1,10 @@
 #include "Contact.hpp"
 
 Contact::Contact() {
-	std::cout << "Constructor called" << std::endl;
 	return;
 }
 
 Contact::~Contact(){
-	std::cout << "Destructor called" << std::endl;
 	return ;
 }
 

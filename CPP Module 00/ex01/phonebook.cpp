@@ -4,9 +4,7 @@
 #include <sstream> //ss
 
 PhoneBook::PhoneBook() : _index(-1), _contactCount(0) {};
-PhoneBook::~PhoneBook() {
-	std::cout << "destructor is called" << std::endl;
-};
+PhoneBook::~PhoneBook() {};
 
 Contact *PhoneBook::_findContact() { return (this->_contacts); }
 
