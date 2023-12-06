@@ -115,6 +115,7 @@ void	PhoneBook::_searchIndex() const
 			put_column(this->_contacts[i], i);
 		while (42)
 		{
+			std::cout << "Please choose Index number(ex. 0) : ";
 			content = put_content();
 			std::stringstream ss(content);
 			ss >> i;
