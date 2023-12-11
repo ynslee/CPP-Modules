@@ -13,6 +13,7 @@ int main(int argc, char **argv)
 	if (argc != 4)
 	{
 		std::cout << "Please put parameters as follow:./sed <filename> <old words> <new words>" << std::endl;
+		return (1);
 	}
 	std::string _fileName = argv[1];
 	std::string	_oldWords = argv[2];
@@ -36,6 +37,11 @@ int main(int argc, char **argv)
 	if (_infile.fail())
 	{
 		std::cout << "Can't open the infile: " << _fileName << std::endl;
+		return (1);
+	}
+	if (_infile.peek() == std::ifstream::traits_type::eof())
+	{
+		std::cout << "file is empty: " << _fileName << std::endl;
 		return (1);
 	}
 	std::string _newFileName = _fileName;

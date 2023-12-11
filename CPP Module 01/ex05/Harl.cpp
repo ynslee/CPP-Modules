@@ -32,6 +32,8 @@ void	Harl::error(void)
 	std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
 }
 
+/*(this->*func)() is calling the member function that func points to on the current object. This is necessary because member functions need to be called on an object, and a function pointer does not have an object associated with it
+*/
 void	Harl::complain(std::string level)
 {
 	pointerFunction	Harls[] = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};

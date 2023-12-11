@@ -3,7 +3,7 @@
 
 Zombie::Zombie() {};
 Zombie::~Zombie() {
-	std::cout << "Pew! Pew! Zombie has been destroyed" << std::endl;
+	std::cout << this->_Name << ": Pew! Pew! I have been destroyed" << std::endl;
 };
 
 void	Zombie::announce()
