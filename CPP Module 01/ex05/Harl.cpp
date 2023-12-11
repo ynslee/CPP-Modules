@@ -1,7 +1,12 @@
 #include "Harl.hpp"
 
-Harl::Harl() {};
-Harl::~Harl() {};
+Harl::Harl() {
+	std::cout << "Harl constructed" << std::endl;
+};
+
+Harl::~Harl() {
+	std::cout << "Harl deconstructed" << std::endl;
+};
 
 void	Harl::debug(void)
 {
@@ -29,5 +34,16 @@ void	Harl::error(void)
 
 void	Harl::complain(std::string level)
 {
-	
+	pointerFunction	Harls[] = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+	std::string levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+
+	for (int i = 0; i < 4; i++)
+	{
+		if (level == levels[i])
+		{
+			(this->*Harls[i])();
+			return ;
+		}
+	}
+	std::cout << "This is not a Proper complain!" << std::endl;
 }

@@ -14,8 +14,11 @@ class Harl{
 	public:
 		Harl();
 		~Harl();
-
 		void	complain(std::string level);
 };
+
+/* this is to reach private member functions as make them as array of function pointers.
+*/
+typedef	void	(Harl::*pointerFunction)();
 
 #endif
