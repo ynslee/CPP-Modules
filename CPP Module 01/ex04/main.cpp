@@ -2,6 +2,23 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sys/stat.h>
+#include <sstream>
+
+static int isDirectory(char *_fileName)
+{
+	struct stat fileStat;
+
+	if (stat(_fileName, &fileStat) == 0)
+	{
+		if (S_ISDIR(fileStat.st_mode))
+		{
+			std::cout << _fileName << " is a directory." << std::endl;
+			return (1);
+		}
+	}
+	return (0);
+}
 
 /**
  * ifstream: inputfilestream
@@ -33,6 +50,8 @@ int main(int argc, char **argv)
 		std::cout << "You have put no words to be changed. Please put parameters as follow:./sed <filename> <old words> <new words> " << std::endl;
 		return(1);		
 	}
+	if (isDirectory(argv[1]))
+		return (1);
 	_infile.open(_fileName);
 	if (_infile.fail())
 	{
