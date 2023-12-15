@@ -1,4 +1,4 @@
-NAME = MyFC_OCF
+NAME = fixedPoint
 FLAGS = -std=c++98 -Wall -Wextra -Werror
 SRCS = main.cpp Fixed.cpp
 OBJ = $(SRCS:.cpp=.o)
