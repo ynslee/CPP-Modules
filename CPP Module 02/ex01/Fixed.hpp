@@ -2,6 +2,7 @@
 # define FIXED_HPP
 
 # include <iostream>
+# include <tgmath.h>
 
 /**
  * Copy Constructor: Creates a new object as a copy of an exisiting object(deep copy)
@@ -19,16 +20,17 @@ class Fixed{
 	
 	public:
 		Fixed();
-		~Fixed();
-		Fixed(const int number);
-		Fixed(const float floats);
+		Fixed(const int _integer);
+		Fixed(const float _float);
 		Fixed(const Fixed& other);
+		~Fixed();
 		Fixed& operator=(const Fixed& other);
-		Fixed& operator<<(const Fixed &other);
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
 		float	toFloat(void) const;
 		int		toInt(void) const;
 };
+
+std::ostream& operator<<(std::ostream &os, const Fixed &Fixed);
 
 #endif
