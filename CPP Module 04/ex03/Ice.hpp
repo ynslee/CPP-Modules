@@ -2,5 +2,7 @@
 # define ICE_HPP
 
 class Ice{
-	
-}
+
+};
+
+#endif
