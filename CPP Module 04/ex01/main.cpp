@@ -3,11 +3,13 @@
 #include "Cat.hpp"
 #include "Dog.hpp"
 #include <iostream>
+#include <memory>
+#include <string>
 
 int	main(void)
 {
   {
-    std::cout << "1. brain example test" << std::endl;
+    std::cout << "1. brain example test\n" << std::endl;
 
     const Animal* j = new Dog();
     const Animal* i = new Cat();
@@ -16,7 +18,7 @@ int	main(void)
     delete i;
   }
   {
-    std::cout << "2. brain mandatory test" << std::endl;
+    std::cout << "\n\n2. brain mandatory test\n" << std::endl;
 
 	Animal* animals[10];
 
@@ -32,7 +34,7 @@ int	main(void)
 	}
   }
   {
-    std::cout << "3. brain deep copy test" << std::endl;
+    std::cout << "\n\n3. brain deep copy test\n" << std::endl;
 
     Cat cat;
     Dog dog;
@@ -69,6 +71,17 @@ int	main(void)
 
 	std::cout << "cat's first idea is " << cat.getBrain().getIdeas(0) << std::endl;
 	std::cout << "copy cat's first idea is " << copyCat.getBrain().getIdeas(0) << std::endl;
+
+	std::cout << "\n\n********cat = copy cat now!!********\n" << std::endl;
+	
+	cat = copyCat;
+	std::cout << "Now cat's first idea is " << cat.getBrain().getIdeas(0) << std::endl;
+	std::cout << "Now copy cat's first idea is " << copyCat.getBrain().getIdeas(0) << std::endl;
+	std::cout << "Address of cat's first idea- \n";
+	cat.objectAddress();
+	std::cout << "Now copy cat's first idea- \n";
+	copyCat.objectAddress();
+	std::cout << "\n\n" << std::endl;
 	
   }
 	return 0;

@@ -43,7 +43,7 @@ void	Brain::setIdeas(unsigned int index, std::string idea){
 std::string	Brain::getIdeas(unsigned int index){
 	if (index < 0 || index > 99){
 		std::cout << "I can't have more than 100 ideas! Also my idea is only positive!" << std::endl;
-		return ;
+		return ("wrong index!");
 	}
 	return(this->ideas[index]);
 }
