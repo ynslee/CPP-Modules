@@ -3,6 +3,7 @@
 Dog::Dog() : Animal(){
 	std::cout << "Constructor for Dog is called 🐕" << std::endl;
 	this->_type = "Dog";
+	this->notInUse = new Brain(); 
 }
 
 Dog::~Dog(){
@@ -22,4 +23,8 @@ Dog&	Dog::operator=(const Dog &other){
 
 void	Dog::makeSound(void) const {
 	std::cout << "🐕Awoooo Woof ruff🐕" << std::endl;
+}
+
+Brain &Dog::getBrain() {
+	return *this->notInUse;
 }
