@@ -81,8 +81,7 @@ int	main(void)
 	cat.objectAddress();
 	std::cout << "Now copy cat's first idea- \n";
 	copyCat.objectAddress();
-	std::cout << "\n\n" << std::endl;
-	
+	std::cout << "\n\n" << std::endl;	
   }
 	return 0;
 }
