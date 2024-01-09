@@ -2,40 +2,30 @@
 
 Character::Character() : _name("random") {
 	for (int i = 0; i < 4; i++) {
-    	this->inventory[i] = NULL;
+    	this->weapons[i] = NULL;
 	}
 };
 
 Character::Character(const std::string name) : _name(name) {
 	for (int i = 0; i < 4; i++) {
-    	this->inventory[i] = NULL;
+    	this->weapons[i] = NULL;
 	}
 };
 
-Character::Character(const Character& other){
-	this->_name = other._name;
-	 for (size_t i = 0; i < 4; i++)
-    {
-        delete inventory[i];
-       inventory[i] = other.inventory[i] ? other.inventory[i]->clone() : NULL;
-    }
-    return *this;
-}
-
-
-
-Character::Character(const Character& other)
-:   _materias(),
-    _name(other._name)
-{
-    *this = other;
+Character::Character(const Character& other) : _name(other._name) {
+	for(int i = 0; i < 4; i++){
+		if (this->weapons[i])
+			delete weapons[i];
+		if (other.weapons[i])
+			this->weapons[i] = other.weapons[i]->clone();
+	}
 }
 
 Character::~Character()
 {
-    for (size_t i = 0; i < 4; i++)
+    for (int i = 0; i < 4; i++)
     {
-        delete inventory[i];
+        delete weapons[i];
     }
 }
 
@@ -43,28 +33,30 @@ Character& Character::operator=(const Character& other)
 {
     if (this == &other)
         return *this;
-    for (size_t i = 0; _materias_max < 4; i++)
-    {
-        delete _materias[i];
-        _materias[i] = other._materias[i] ? other._materias[i]->clone() : NULL;
-    }
+	else{
+		this->_name = other._name;
+		for (int i = 0; i < 4; i++){
+			delete weapons[i];
+			weapons[i] = other.weapons[i]->clone();
+		}
+	}
     return *this;
 }
 
 const std::string& Character::getName() const
 {
-    return _name;
+    return this->_name;
 }
 
 void Character::equip(AMateria* m)
 {
-    if (!m)
+    if (m = NULL)
         return;
-    for (size_t i = 0; i < _materias_max; i++)
+    for (int i = 0; i < 4; i++)
     {
-        if (!_materias[i])
+        if (weapons[i] = NULL)
         {
-            _materias[i] = m;
+            weapons[i] = m;
             return ;
         }
     }
@@ -72,14 +64,14 @@ void Character::equip(AMateria* m)
 
 void Character::unequip(int idx)
 {
-    if (idx < 0 || idx >= (int)_materias_max)
+    if (idx < 0 || idx >= 4)
         return ;
-    _materias[idx] = NULL;
+    weapons[idx] = NULL;
 }
 
 void Character::use(int idx, ICharacter& target)
 {
-    if (idx < 0 || idx >= (int)_materias_max || !_materias[idx])
+    if (idx < 0 || idx >= (int)4 || !weapons[idx])
         return ;
-    _materias[idx]->use(target);
+    weapons[idx]->use(target);
 }
