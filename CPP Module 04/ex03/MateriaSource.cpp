@@ -19,12 +19,15 @@ MateriaSource::MateriaSource(const MateriaSource& other) {
 }
 
 MateriaSource& MateriaSource::operator=(const MateriaSource& other){
+	if (this == &other)
+		return *this;
 	for(int i = 0; i < 4; i++){
 		if (this->inventory[i] != other.inventory[i])
 			this->inventory[i] = other.inventory[i];
 		else
 			this->inventory[i] = NULL;
 	}
+	return *this;
 }
 
 void	MateriaSource::learnMateria(AMateria* _materia){
