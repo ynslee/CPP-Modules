@@ -5,7 +5,7 @@ AMateria::AMateria() : _type("random") {
 }
 
 AMateria::~AMateria() {
-	std::cout << "[ AMateria ] destructor called" << std::endl;
+	std::cout << "[ AMateria ] destructor for [" << this->_type << "] called" << std::endl;
 }
 
 AMateria::AMateria(std::string const &type) : _type(type) {
@@ -13,7 +13,7 @@ AMateria::AMateria(std::string const &type) : _type(type) {
 }
 
 AMateria::AMateria(const AMateria& other) : _type(other._type) {
-	std::cout << "[ AMateria ] copoy constructor called" << std::endl;
+	std::cout << "[ AMateria ] copy constructor called" << std::endl;
 };
 
 AMateria&	AMateria::operator=(const AMateria &other){

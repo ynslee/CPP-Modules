@@ -1,6 +1,6 @@
-NAME = AnimalsWithBrains
-FLAGS = -std=c++20 -Wall -Wextra -Werror
-SRCS = main.cpp 
+NAME = Materialism
+FLAGS = -std=c++11 -Wall -Wextra -Werror
+SRCS = main.cpp AMateria.cpp Character.cpp Cure.cpp Ice.cpp MateriaSource.cpp
 OBJ = $(SRCS:.cpp=.o)
 
 .PHONY: all clean fclean re

@@ -5,6 +5,8 @@
 # include <string>
 # include "Character.hpp"
 
+class ICharacter;
+
 class AMateria{
 		protected:
 			std::string _type;

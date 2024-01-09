@@ -4,18 +4,21 @@ MateriaSource::MateriaSource() {
 	for(int i = 0; i < 4; i++){
 		this->inventory[i] = NULL;
 	}
+	std::cout << "[ MateriaSource ] default constructor called" << std::endl;
 };
 
 MateriaSource::~MateriaSource() {
 	for(int i = 0; i < 4; i++){
 		delete inventory[i];
 	}
+	std::cout << "[ MateriaSource ] destructor called" << std::endl;
 };
 
 MateriaSource::MateriaSource(const MateriaSource& other) {
 	for(int i = 0; i < 4; i++){
 		this->inventory[i] = other.inventory[i];
 	}
+	std::cout << "[ MateriaSource ] copy constructor called" << std::endl;
 }
 
 MateriaSource& MateriaSource::operator=(const MateriaSource& other){
@@ -27,6 +30,7 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& other){
 		else
 			this->inventory[i] = NULL;
 	}
+	std::cout << "[ MateriaSource ] copy assignment constructor called" << std::endl;
 	return *this;
 }
 

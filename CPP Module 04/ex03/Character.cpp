@@ -4,12 +4,14 @@ Character::Character() : _name("random") {
 	for (int i = 0; i < 4; i++) {
     	this->weapons[i] = NULL;
 	}
+    std::cout << "[ Character ] default constructor called" << std::endl;
 };
 
 Character::Character(const std::string name) : _name(name) {
 	for (int i = 0; i < 4; i++) {
     	this->weapons[i] = NULL;
 	}
+    std::cout << "[ Character ] constructor called" << std::endl;
 };
 
 Character::Character(const Character& other) : _name(other._name) {
@@ -19,6 +21,7 @@ Character::Character(const Character& other) : _name(other._name) {
 		if (other.weapons[i])
 			this->weapons[i] = other.weapons[i]->clone();
 	}
+    std::cout << "[ Character ] copy constructor called" << std::endl;
 }
 
 Character::~Character()
@@ -27,6 +30,7 @@ Character::~Character()
     {
         delete weapons[i];
     }
+    std::cout << "[ Character ] destructor called" << std::endl;
 }
 
 Character& Character::operator=(const Character& other)
@@ -50,11 +54,11 @@ const std::string& Character::getName() const
 
 void Character::equip(AMateria* m)
 {
-    if (m = NULL)
+    if (m == NULL)
         return;
     for (int i = 0; i < 4; i++)
     {
-        if (weapons[i] = NULL)
+        if (weapons[i] == NULL)
         {
             weapons[i] = m;
             return ;
