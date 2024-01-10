@@ -1,5 +1,5 @@
 NAME = Materialism
-FLAGS = -std=c++11 -Wall -Wextra -Werror
+FLAGS = -std=c++11 -Wall -Wextra -Werror 
 SRCS = main.cpp AMateria.cpp Character.cpp Cure.cpp Ice.cpp MateriaSource.cpp
 OBJ = $(SRCS:.cpp=.o)
 

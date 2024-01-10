@@ -59,6 +59,7 @@ int	main(void)
 
 	std::cout << "\n-------Time for some whiskers!----------\n" << std::endl;
 	Cat copyCat(cat);
+	
 	for (int i = 0; i < 5; i++){
 		std::cout << "cat's first five idea is " << "[" << i << "]" << cat.getBrain().getIdeas(i) << std::endl;
 		}

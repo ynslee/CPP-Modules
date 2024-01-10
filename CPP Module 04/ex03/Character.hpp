@@ -4,11 +4,13 @@
 # include <iostream>
 # include <string>
 # include "ICharacter.hpp"
+# include "AMateria.hpp"
 
 class Character : public ICharacter{
 	private:
 		std::string	_name;
-		AMateria	*weapons[4];
+		AMateria	*inventory[4];
+		AMateria	*floor[1000];
 
 	public:
 		Character();

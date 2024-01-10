@@ -2,47 +2,77 @@
 
 Character::Character() : _name("random") {
 	for (int i = 0; i < 4; i++) {
-    	this->weapons[i] = NULL;
+    	this->inventory[i] = NULL;
 	}
-    std::cout << "[ Character ] default constructor called" << std::endl;
+    for (int i = 0; i < 1000; i++) {
+    	this->floor[i] = NULL;
+	}
+    // std::cout << "[ Character ] default constructor called" << std::endl;
 };
 
 Character::Character(const std::string name) : _name(name) {
 	for (int i = 0; i < 4; i++) {
-    	this->weapons[i] = NULL;
+    	this->inventory[i] = NULL;
 	}
-    std::cout << "[ Character ] constructor called" << std::endl;
+    for (int i = 0; i < 1000; i++) {
+    	this->floor[i] = NULL;
+	}
+    // std::cout << "[ Character ] constructor called" << std::endl;
 };
 
 Character::Character(const Character& other) : _name(other._name) {
 	for(int i = 0; i < 4; i++){
-		if (this->weapons[i])
-			delete weapons[i];
-		if (other.weapons[i])
-			this->weapons[i] = other.weapons[i]->clone();
+        this->inventory[i] = NULL;
+		if (other.inventory[i])
+			this->inventory[i] = other.inventory[i]->clone();
 	}
-    std::cout << "[ Character ] copy constructor called" << std::endl;
+    for (int i = 0; i < 1000; i++) {
+    	this->floor[i] = NULL;
+        if (other.floor[i])
+            this->floor[i] = other.floor[i]->clone();
+	}
+    // std::cout << "[ Character ] copy constructor called" << std::endl;
 }
 
 Character::~Character()
 {
     for (int i = 0; i < 4; i++)
     {
-        delete weapons[i];
+         delete this->inventory[i];
     }
-    std::cout << "[ Character ] destructor called" << std::endl;
+    for (int i = 0; i < 1000; i++) {
+        if (this->floor[i])
+           delete this->floor[i];
+    }
+    // std::cout << "[ Character ] destructor called" << std::endl;
 }
 
 Character& Character::operator=(const Character& other)
 {
-    if (this == &other)
-        return *this;
-	else{
-		this->_name = other._name;
-		for (int i = 0; i < 4; i++){
-			delete weapons[i];
-			weapons[i] = other.weapons[i]->clone();
-		}
+	this->_name = other._name;
+	for (int i = 0; i < 4; i++){
+        if (this->inventory[i]){
+            delete this->inventory[i];
+            this->inventory[i] = NULL;
+        }
+    }
+    for (int i = 0; i < 4; i++){
+        if (other.inventory[i])
+		    this->inventory[i] = other.inventory[i]->clone();
+		else
+            this->inventory[i] = NULL;
+	}
+    for (int i = 0; i < 1000; i++){
+        if (this->floor[i]){
+            delete this->floor[i];
+            this->floor[i] = NULL;
+        }
+    }
+    for (int i = 0; i < 1000; i++){
+        if (other.floor[i])
+		    this->floor[i] = other.floor[i]->clone();
+        else
+            this->floor[i] = NULL;
 	}
     return *this;
 }
@@ -58,24 +88,36 @@ void Character::equip(AMateria* m)
         return;
     for (int i = 0; i < 4; i++)
     {
-        if (weapons[i] == NULL)
+        if (inventory[i] == NULL)
         {
-            weapons[i] = m;
+            inventory[i] = m;
             return ;
+        }
+    }
+    for (int i = 0; i < 1000; i++){
+        if(floor[i] == NULL){
+            floor[i] = m;
+            break;
         }
     }
 }
 
 void Character::unequip(int idx)
 {
-    if (idx < 0 || idx >= 4)
+    if (idx < 0 || idx >= 4 || !inventory[idx])
         return ;
-    weapons[idx] = NULL;
+    for (int i = 0; i < 1000; i++){
+        if(floor[i] == NULL){
+            floor[i] = inventory[idx];
+            inventory[idx] = NULL;
+            break;
+        }
+    }
 }
 
 void Character::use(int idx, ICharacter& target)
 {
-    if (idx < 0 || idx >= (int)4 || !weapons[idx])
+    if (idx < 0 || idx > 3 || !inventory[idx])
         return ;
-    weapons[idx]->use(target);
+    inventory[idx]->use(target);
 }

@@ -3,9 +3,7 @@
 
 # include <iostream>
 # include <string>
-# include "Character.hpp"
-
-class ICharacter;
+# include "ICharacter.hpp"
 
 class AMateria{
 		protected:
