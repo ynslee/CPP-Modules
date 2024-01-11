@@ -6,11 +6,13 @@
 # include "ICharacter.hpp"
 # include "AMateria.hpp"
 
+# define MAX 1
+
 class Character : public ICharacter{
 	private:
 		std::string	_name;
 		AMateria	*inventory[4];
-		AMateria	*floor[1000];
+		AMateria	*floor[MAX];
 
 	public:
 		Character();

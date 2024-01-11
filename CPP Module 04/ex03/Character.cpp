@@ -4,7 +4,7 @@ Character::Character() : _name("random") {
 	for (int i = 0; i < 4; i++) {
     	this->inventory[i] = NULL;
 	}
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < MAX; i++) {
     	this->floor[i] = NULL;
 	}
     // std::cout << "[ Character ] default constructor called" << std::endl;
@@ -14,7 +14,7 @@ Character::Character(const std::string name) : _name(name) {
 	for (int i = 0; i < 4; i++) {
     	this->inventory[i] = NULL;
 	}
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < MAX; i++) {
     	this->floor[i] = NULL;
 	}
     // std::cout << "[ Character ] constructor called" << std::endl;
@@ -26,7 +26,7 @@ Character::Character(const Character& other) : _name(other._name) {
 		if (other.inventory[i])
 			this->inventory[i] = other.inventory[i]->clone();
 	}
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < MAX; i++) {
     	this->floor[i] = NULL;
         if (other.floor[i])
             this->floor[i] = other.floor[i]->clone();
@@ -40,7 +40,7 @@ Character::~Character()
     {
          delete this->inventory[i];
     }
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < MAX; i++) {
         if (this->floor[i])
            delete this->floor[i];
     }
@@ -62,13 +62,13 @@ Character& Character::operator=(const Character& other)
 		else
             this->inventory[i] = NULL;
 	}
-    for (int i = 0; i < 1000; i++){
+    for (int i = 0; i < MAX; i++){
         if (this->floor[i]){
             delete this->floor[i];
             this->floor[i] = NULL;
         }
     }
-    for (int i = 0; i < 1000; i++){
+    for (int i = 0; i < MAX; i++){
         if (other.floor[i])
 		    this->floor[i] = other.floor[i]->clone();
         else
@@ -94,7 +94,7 @@ void Character::equip(AMateria* m)
             return ;
         }
     }
-    for (int i = 0; i < 1000; i++){
+    for (int i = 0; i < MAX; i++){
         if(floor[i] == NULL){
             floor[i] = m;
             break;
@@ -107,7 +107,7 @@ void Character::unequip(int idx)
 {
     if (idx < 0 || idx >= 4 || !inventory[idx])
         return ;
-    for (int i = 0; i < 1000; i++){
+    for (int i = 0; i < MAX; i++){
         if(floor[i] == NULL){
             floor[i] = inventory[idx];
             inventory[idx] = NULL;
