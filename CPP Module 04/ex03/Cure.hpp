@@ -3,6 +3,9 @@
 
 # include "AMateria.hpp"
 
+/*Used forward class declaration to avoid cicular dependency which could happen with header inclusion only
+this is to avoid compilation errors*/
+
 class ICharacter;
 
 class Cure: public AMateria {
