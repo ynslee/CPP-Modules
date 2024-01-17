@@ -1,6 +1,6 @@
 #include "Form.hpp"
 
-Form::Form(std::string const _name, bool _signed, const int _signGrade, const int _executeGrade) : name(_name), _signed(false), signGrade(_signGrade), executeGrade(_executeGrade) {
+Form::Form(std::string const _name, const int _signGrade, const int _executeGrade) : name(_name), _signed(false), signGrade(_signGrade), executeGrade(_executeGrade) {
 	if (signGrade < 1 || executeGrade < 1)
 		throw Form::GradeTooHighException();
 	if (signGrade > 150 || executeGrade > 150)
@@ -30,15 +30,40 @@ int	Form::getExecuteGrade() const {
 	return (executeGrade);
 }
 
-bool	Form::getSigned() const {
+bool	Form::getSignedStatus() const {
 	return (_signed);
 }
 
 void Form::beSigned(Bureaucrat &b) {
+
+	std::string msg;
+
+	if (this->getSignedStatus() == true){
+		msg = " couldn't sign ";
+		std::cout << b.getName() << msg << name << " because it was already signed" << std::endl;
+		throw Form::AlreadySignedException();
+	}
 	if (b.getGrade() > signGrade)
 	{
-		std::cout << b.getName() << "couldn't sign" << name;
-		throw Form::BureaucratCantSignException();
+		throw Form::GradeTooLowException();
+	}
+	else{
+		_signed = 1;
 	}
 }	
 
+std::ostream &operator<<(std::ostream &os, const Form &f)
+{
+	std::string msg;
+
+	if (f.getSignedStatus() == true)
+		msg = " is signed. ";
+	else
+		msg = " is not signed. ";
+
+	std::cout << "Form: " << f.getName() << msg
+		<< " It requires " << f.getSignGrade() << " grade to sign and "
+		<< f.getExecuteGrade() << " grade to execute. "<< std::endl;
+
+	return (os);
+}

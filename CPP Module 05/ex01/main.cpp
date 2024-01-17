@@ -1,59 +1,41 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
-int main(void)
-{
-    std::cout << "\n******** No Exception ********\n" << std::endl;
-    try
-    {
-        Bureaucrat officer("Officer", 3);
-        std::cout << officer<< std::endl;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    std::cout << "\n******** Too High Exception ********\n" << std::endl;
-    try
-    {
-        Bureaucrat Yoonseon("Yoonseon", -2);
-        std::cout << Yoonseon << std::endl;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    std::cout << "\n******** Too Low Exception ********\n" << std::endl;
-    try
-    {
-        Bureaucrat Chuchi("Chuchi", 152);
-        std::cout << Chuchi << std::endl;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    std::cout << "\n******** Increment grade ********\n" << std::endl;
-    try
-    {
-         Bureaucrat test("Yoonseon", 1);
-         std::cout << test << std::endl;
-		 std::cout << "Incrementing grade of " << test.getName() << ":" << std::endl;
-         test.incrementGrade();
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    std::cout << "\n******** Decrement grade ********\n" << std::endl;
-    try
-    {
-        Bureaucrat test1("Chuchi", 150);
-         std::cout << test1 << std::endl;
-		  std::cout << "decrementing grade of " << test1.getName() << ":" << std::endl;
-        test1.decrementGrade();
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
+int main(void) {
+	Form f("A very important form", 5, 3);
+	std::cout << f << std::endl << std::endl;
+
+	// Form a(f);
+	// std::cout << a << std::endl;
+
+	// Form b = a;
+	// std::cout << a << std::endl;
+	
+	// a = b;
+	// std::cout << a << std::endl;
+
+
+	Bureaucrat m("Mark", 106);
+	std::cout << m << std::endl << std::endl;
+	
+	Bureaucrat j("Johnson", 1);
+	std::cout << j << std::endl << std::endl;
+	
+	m.signForm(f);
+	std::cout << std::endl;
+
+	f.beSigned(m);
+	std::cout << std::endl;
+
+	std::cout << f << std::endl << std::endl;
+
+	j.signForm(f);
+	std::cout << std::endl;
+
+	std::cout << f << std::endl << std::endl;
+
+	Form error("Error", 151, -1);
+	std::cout << error << std::endl << std::endl;
+
+	return 0;
 }

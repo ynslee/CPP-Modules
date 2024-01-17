@@ -1,6 +1,6 @@
-NAME = WannaBeBureaucrat
-FLAGS = -std=c++14 -Wall -Wextra -Werror
-SRCS = Bureaucrat.cpp main.cpp
+NAME = FormingBureaucrat
+FLAGS = -std=c++11 -Wall -Wextra -Werror
+SRCS = Bureaucrat.cpp main.cpp Form.cpp
 OBJ = $(SRCS:.cpp=.o)
 
 .PHONY: all clean fclean re

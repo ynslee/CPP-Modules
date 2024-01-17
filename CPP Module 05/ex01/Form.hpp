@@ -17,16 +17,15 @@ class Form {
 	Form();
 
 	public:
-	Form(std::string const _name, bool _signed, const int _signGrade, const int _executeGrade);
+	Form(std::string const _name, const int _signGrade, const int _executeGrade);
 	~Form();
 	Form(const Form &other);
 	Form& operator=(const Form &other);
 	std::string getName() const;
 	int	getSignGrade() const;
 	int getExecuteGrade() const;
-	bool	getSigned() const;
+	bool	getSignedStatus() const;
 	void beSigned(Bureaucrat &b);
-	void signForm(Bureaucrat &b);
 
 	class GradeTooHighException : public std::exception {
 		public:
@@ -45,16 +44,10 @@ class Form {
 	class AlreadySignedException : public std::exception{
 		public:
 		const char *what() const noexcept override{
-			return ("Form is already signed. ");
+			return ("Form is already signed. \n");
 		};
 	};
 
-	class BureaucratCantSignException : public std::exception{
-		public:
-		const char *what() const noexcept override{
-			return (" because Bureaucrat has too low grade to sign. ");
-		};
-	};
 };
 
 std::ostream &operator<<(std::ostream &os, const Form &f);
