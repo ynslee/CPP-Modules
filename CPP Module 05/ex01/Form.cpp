@@ -43,7 +43,7 @@ void Form::beSigned(Bureaucrat &b) {
 		std::cout << b.getName() << msg << name << " because it was already signed" << std::endl;
 		throw Form::AlreadySignedException();
 	}
-	if (b.getGrade() > signGrade)
+	else if (b.getGrade() > signGrade)
 	{
 		throw Form::GradeTooLowException();
 	}
@@ -61,7 +61,7 @@ std::ostream &operator<<(std::ostream &os, const Form &f)
 	else
 		msg = " is not signed. ";
 
-	std::cout << "Form: " << f.getName() << msg
+	std::cout << "Form - " << f.getName() << msg
 		<< " It requires " << f.getSignGrade() << " grade to sign and "
 		<< f.getExecuteGrade() << " grade to execute. "<< std::endl;
 

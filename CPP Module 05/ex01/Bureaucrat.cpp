@@ -53,14 +53,23 @@ void	Bureaucrat::signForm(Form &f){
 
 	std::string msg;
 
-	if (f.getSignGrade() < this->grade)
+	if (f.getSignedStatus() == true)
+	{
+		msg = " couldn't sign ";
+		std::cout << name << msg << f.getName() << " because form is already signed" << std::endl;
+	}
+	else if (f.getSignGrade() < this->grade)
 	{
 		msg = " couldn't sign ";
 		std::cout << name << msg << f.getName() << " because bureaucrat's grade is lower than form sign grade" << std::endl;
 	}
 	else
 	{
-		std::cout << name << " signed " << f.getName();
+		try { f.beSigned(*this);
+		}
+		catch (std::exception &e) {
+			std::cerr << "caught in exception of besigned function: " << e.what() << std::endl;
+		}
 	}
 	
 }

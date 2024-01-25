@@ -2,8 +2,8 @@
 #include "Form.hpp"
 
 int main(void) {
-	Form f("A very important form", 5, 3);
-	std::cout << f << std::endl << std::endl;
+	Form f("📄Doggo📄", 5, 3);
+	std::cout << f << std::endl;
 
 	// Form a(f);
 	// std::cout << a << std::endl;
@@ -15,27 +15,42 @@ int main(void) {
 	// std::cout << a << std::endl;
 
 
-	Bureaucrat m("Mark", 106);
-	std::cout << m << std::endl << std::endl;
+	Bureaucrat s("Sunny", 106);
+	std::cout << s << std::endl;
 	
-	Bureaucrat j("Johnson", 1);
-	std::cout << j << std::endl << std::endl;
+	Bureaucrat c("Chuchi", 1);
+	std::cout << c << std::endl << std::endl;
 	
-	m.signForm(f);
+	s.signForm(f);
 	std::cout << std::endl;
 
-	f.beSigned(m);
+try {
+	f.beSigned(s);
+	std::cout << std::endl;
+}
+catch (std::exception &e) {
+	std::cerr << "Caught Grade too low exception: " << e.what() << std::endl;
+}
+
+	std::cout << f << std::endl;
+
+	c.signForm(f);
 	std::cout << std::endl;
 
-	std::cout << f << std::endl << std::endl;
+	std::cout << f << std::endl;
 
-	j.signForm(f);
+try {
+	f.beSigned(c);
 	std::cout << std::endl;
+}
+catch (Form::AlreadySignedException &e) {
+	std::cerr << "Caught Already signed exceptiion: " << e.what() << std::endl;
+}
 
-	std::cout << f << std::endl << std::endl;
-
-	Form error("Error", 151, -1);
-	std::cout << error << std::endl << std::endl;
-
+try {
+	Form error("Error", 151, 0);
+} catch (const std::exception &e){
+	std::cerr << "Caught in Grade exception  - can't make form" << std::endl;
+}
 	return 0;
 }
