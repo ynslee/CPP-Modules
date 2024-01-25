@@ -39,6 +39,9 @@ catch (std::exception &e) {
 
 	std::cout << f << std::endl;
 
+	c.signForm(f);
+	std::cout << std::endl;
+
 try {
 	f.beSigned(c);
 	std::cout << std::endl;
