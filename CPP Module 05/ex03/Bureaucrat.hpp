@@ -4,27 +4,28 @@
 # include <iostream>
 # include <string>
 # include <exception>
-# include "Form.hpp"
+# include "AForm.hpp"
 
-class Form;
+class AForm;
 
 class Bureaucrat {
 	private:
 	const std::string	name;
 	int					grade;
-	Bureaucrat& operator=(const Bureaucrat &other);
 
 	public:
 	Bureaucrat();
 	Bureaucrat(std::string const _name, int _grade);
 	~Bureaucrat();
 	Bureaucrat(const Bureaucrat &other);
+	Bureaucrat& operator=(const Bureaucrat &other);
 	std::string getName() const;
 	int	getGrade() const;
 	void	setGrade(int _grade);
 	void	incrementGrade();
 	void	decrementGrade();
-	void	signForm(Form &f);
+	void	signForm(AForm &f);
+	void	executeForm(AForm const & form);
 
 	class GradeTooHighException : public std::exception {
 		public:

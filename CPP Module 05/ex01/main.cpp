@@ -8,12 +8,6 @@ int main(void) {
 	// Form a(f);
 	// std::cout << a << std::endl;
 
-	// Form b = a;
-	// std::cout << a << std::endl;
-	
-	// a = b;
-	// std::cout << a << std::endl;
-
 
 	Bureaucrat s("Sunny", 106);
 	std::cout << s << std::endl;

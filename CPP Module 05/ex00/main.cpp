@@ -44,6 +44,7 @@ int main(void)
     {
         std::cerr << e.what() << '\n';
     }
+
     std::cout << "\n******** Decrement grade ********\n" << std::endl;
     try
     {
@@ -56,4 +57,12 @@ int main(void)
     {
         std::cerr << e.what() << '\n';
     }
+
+
+std::cout << "\n******** copy ********\n" << std::endl;
+    Bureaucrat test("Yoonseon", 1);
+    Bureaucrat test2(test);
+
+    std::cout << test2 << std::endl;
+
 }

@@ -1,6 +1,6 @@
-NAME = SigningBureaucrats
-FLAGS = -std=c++11 -Wall -Wextra -Werror
-SRCS = Bureaucrat.cpp main.cpp Form.cpp
+NAME = ExecutingBureaucrats
+FLAGS = -std=c++17 -Wall -Wextra -Werror
+SRCS = Bureaucrat.cpp main.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 OBJ = $(SRCS:.cpp=.o)
 
 .PHONY: all clean fclean re
