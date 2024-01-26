@@ -20,7 +20,7 @@ int main(void) {
 	Elf.executeForm(ShrubberyForm);
 	}
 	catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+		std::cerr << e.what() << std::endl;
 	}
 	ShrubberyForm.execute(Santa);
 
@@ -34,7 +34,7 @@ int main(void) {
 		std::cout << "elf is trying to sign the form" << std::endl;
 		RobbotomyForm.beSigned(Elf);
 	} catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+		std::cerr << e.what() << std::endl;
 	}
 
 	Santa.signForm(RobbotomyForm);
@@ -43,14 +43,14 @@ int main(void) {
 		Elf.executeForm(RobbotomyForm);
 	}
 	catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+		std::cerr << e.what() << std::endl;
 	}
 	try {
 		std::cout << "Santa is trying to execute the form" << std::endl;
 		Santa.executeForm(RobbotomyForm);
 	}
 	catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+		std::cerr << e.what() << std::endl;
 	}
 
 	std::cout << "\n\n*********💂‍♀️Presidential Pardon Form test💂‍♀️**********" << std::endl;
@@ -63,7 +63,7 @@ int main(void) {
 		std::cout << "elf is trying to sign the form" << std::endl;
 		Presidential.beSigned(Elf);
 	} catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+		std::cerr << e.what() << std::endl;
 	}
 
 	Santa.signForm(Presidential);
@@ -72,14 +72,14 @@ int main(void) {
 		Elf.executeForm(Presidential);
 	}
 	catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+		std::cerr << e.what() << std::endl;
 	}
 	try {
 		std::cout << "Santa is trying to execute the form" << std::endl;
 		Santa.executeForm(Presidential);
 	}
 	catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+		std::cerr << e.what() << std::endl;
 	}
 
 	return 0;

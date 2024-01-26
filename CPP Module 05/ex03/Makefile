@@ -1,4 +1,4 @@
-NAME = ExecutingBureaucrats
+NAME = DoomedIntern
 FLAGS = -std=c++17 -Wall -Wextra -Werror
 SRCS = Bureaucrat.cpp main.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
 OBJ = $(SRCS:.cpp=.o)

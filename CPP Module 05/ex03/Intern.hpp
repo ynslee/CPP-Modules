@@ -3,6 +3,8 @@
 
 # include "AForm.hpp"
 
+class AForm;
+
 class Intern{
 	private:
 	AForm *createShrubberyCreationForm(std::string const &target);

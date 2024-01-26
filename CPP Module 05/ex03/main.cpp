@@ -2,34 +2,84 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "AForm.hpp"
 #include "Intern.hpp"
 
 int main(void)
 {
-	Bureaucrat Lukatsch("Lukatsch", 5);
-	Bureaucrat Dan("Dan", 150);
+	Bureaucrat Chuchi ("Chuchi", 5);
+	Bureaucrat Sunny("Sunny", 150);
 
-	Intern Teemu;
+	std::cout << Chuchi << std::endl;
+	std::cout << Sunny << std::endl;
 
-	AForm *shrubbery = Teemu.makeForm("ShrubberyCreationForm", "HIVE");
-	AForm *robotomy = Teemu.makeForm("RobotomyRequestForm", "Rasmus");
-	AForm *presidential = Teemu.makeForm("PresidentialPardonForm", "Dean");	
-	AForm *lukasDrinkingMilk = Teemu.makeForm("MilkMeBrother", "Lukas");
-	(void)lukasDrinkingMilk;
-	
+	Intern Lauri;
+	AForm *shrubbery;
 
-	Dan.signForm(*shrubbery);
+	try {shrubbery = Lauri.makeForm("shrubbery creation", "Plant");
+	}catch(std::exception &e){
+		std::cerr << e.what() << std::endl;
+	}
+	std::cout << *shrubbery << std::endl;
 
-	Lukatsch.signForm(*shrubbery);
-	Lukatsch.signForm(*robotomy);
-	Lukatsch.signForm(*presidential);
+	AForm *robotomy;
+	try {
+		robotomy = Lauri.makeForm("robotomy request", "Drilling");
+	} catch(std::exception &e){
+		std::cerr << e.what() << std::endl;
+	}
+	std::cout << *robotomy << std::endl;
 
-	Dan.executeForm(*shrubbery);
+	AForm *presidential;
+	try {
+		presidential = Lauri.makeForm("presidential pardon", "Sauli");
+	}catch(std::exception &e){
+		std::cerr << e.what() << std::endl;
+	}
+	std::cout << *presidential << std::endl;
 
-	Lukatsch.executeForm(*shrubbery);
-	Lukatsch.executeForm(*robotomy);
-	Lukatsch.executeForm(*robotomy);
-	Lukatsch.executeForm(*presidential);
+	try {
+		AForm *ChuchiEatsEggs = Lauri.makeForm("Chuchi eats eggs", "Doggo");
+		(void)ChuchiEatsEggs;
+	}catch (std::exception &e){
+		std::cerr << e.what() << std::endl;
+	}
+
+	try {
+		Sunny.signForm(*shrubbery);
+	}catch (std::exception &e){
+		std::cerr << e.what() << std::endl;
+	}
+	try {Chuchi.signForm(*shrubbery);
+	}catch (std::exception &e){
+		std::cerr << e.what() << std::endl;
+	}
+	try{Sunny.signForm(*robotomy);
+	}catch (std::exception &e){
+		std::cerr << e.what() << std::endl;
+	}
+	try{Sunny.signForm(*presidential);
+	}catch (std::exception &e){
+		std::cerr << e.what() << std::endl;
+	}
+
+	try {Sunny.executeForm(*shrubbery);
+	}catch (std::exception &e){
+		std::cerr << e.what() << std::endl;
+	}
+
+	try{Chuchi.executeForm(*shrubbery);
+	}catch (std::exception &e){
+		std::cerr << e.what() << std::endl;
+	}
+	try{Chuchi.executeForm(*robotomy);
+	}catch (std::exception &e){
+		std::cerr << e.what() << std::endl;
+	}
+	try{Chuchi.executeForm(*presidential);
+	}catch (std::exception &e){
+		std::cerr << e.what() << std::endl;
+	}
 
 	delete shrubbery;
 	delete robotomy;
