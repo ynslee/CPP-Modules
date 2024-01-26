@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <ctime>
 
+
 RobotomyRequestForm::RobotomyRequestForm(std::string const &target) : AForm(target, 72, 45) {}
 
 RobotomyRequestForm::~RobotomyRequestForm() {}
@@ -16,12 +17,17 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &o
 void RobotomyRequestForm::execute(Bureaucrat const &executor) const {
 	AForm::execute(executor);
 
-	std::srand(static_cast<unsigned int>(std::time(NULL)));
-	if (std::rand() % 2 == 0)
+	srand(time(0));
+	static int randomise = rand();
+	std::cout << "DRRIIILLLLIIIIIINGGG: Zzzzzzz ZZzzzz Clanky Clank!🤖" << std::endl;
+	std::cout << "DRRIIILLLLIIIIIINGGG: Zzzzzzz ZZzzzz Clanky Clank Clank!🤖" << std::endl;
+	if (randomise % 2 == 0)
 	{
-		std::cout << executor.getName() << " executed " << getName() << std::endl;
-		std::cout << "DRRIIILLLLIIIIIINGGG: Zzzzzzz ZZzzzz Clanky Clank!🤖" << std::endl;
+		randomise++;
+		std::cout << executor.getName() << " succefully robotomised " << getName() << std::endl;
 	}
-	else
+	else{
+		randomise++;
 		throw RobotomyFailedException();
+	}
 }
