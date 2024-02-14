@@ -1,4 +1,4 @@
-NAME = WannaBeBureaucrat
+NAME = ScalarConverter
 FLAGS = -std=c++14 -Wall -Wextra -Werror
 SRCS = ScalarConverter.cpp main.cpp
 OBJ = $(SRCS:.cpp=.o)
