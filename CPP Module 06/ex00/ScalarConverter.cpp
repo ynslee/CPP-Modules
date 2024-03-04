@@ -14,6 +14,29 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &src) {
 
 ScalarConverter::~ScalarConverter() {}
 
+int ScalarConverter::getType(std::string const str){
+	
+	if (str.compare("inf") == 0 || str.compare("inff") == 0)
+		return (PSEUDOINFPOS);
+	else if (str.compare("-inf") == 0 || str.compare("-inff") == 0)
+		return (PSEUDOINFNEG);
+	else if (str.compare("nan") == 0 || str.compare("nanf") == 0)
+		return (PSEUDONAN);
+	if (str.find('.') != std::string::npos && str.find('f') != std::string::npos)
+		return (FLOAT);
+	else if (str.find('.') != std::string::npos && str.find('f') == std::string::npos)
+		return (DOUBLE);
+	if (str.length() == 1 && isprint(str[0]))
+		return (CHAR);
+	for (int i = 0; i < str.length(); i++)
+	{
+		if (!isdigit(str[i]) && str[0] != '-' && str[0] != '+')
+			return (INVALID);
+	}
+	return (INT);
+}
+
+
 void ScalarConverter::convert(std::string const &str){
 	char c;
 	int i;
@@ -21,12 +44,7 @@ void ScalarConverter::convert(std::string const &str){
 	double d;
 	int type = -1;
 
-	if (str.compare("inf") == 0 || str.compare("inff") == 0)
-		type = PSEUDOINFPOS;
-	else if (str.compare("-inf") == 0 || str.compare("-inff") == 0)
-		type = PSEUDOINFNEG;
-	else if (str.compare("nan") == 0 || str.compare("nanf") == 0)
-		type = PSEUDONAN;
+	type = getType(str);
 
 	// Conver to char
 	try {
