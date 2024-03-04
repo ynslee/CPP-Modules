@@ -17,17 +17,18 @@ int main(int argc, char **argv)
 	ScalarConverter::convert(argv[1]);
 
 
-	std::cout << "------------------------------" << std::endl;
-	std::cout << "---Integer overflow happened--" << std::endl;
-	std::cout << "------------------------------" << std::endl;	
-	int i = std::numeric_limits<int>::max();
-	i = i + 1;
-	ScalarConverter::convert(std::to_string(i));
-	std::cout << "------------------------------" << std::endl;
-	std::cout << "---Float overflow happened----" << std::endl;
-	std::cout << "------------------------------" << std::endl;	
-	float f = std::numeric_limits<float>::max();
-	f = f * 2;
-	ScalarConverter::convert(std::to_string(f));
-	return 0;
+	// std::cout << "------------------------------" << std::endl;
+	// std::cout << "---Integer overflow happened--" << std::endl;
+	// std::cout << "------------------------------" << std::endl;	
+	// int i = std::numeric_limits<int>::max();
+	// i = i + 1;
+	// ScalarConverter::convert(std::to_string(i));
+	// std::cout << "------------------------------" << std::endl;
+	// std::cout << "---Float overflow happened----" << std::endl;
+	// std::cout << "------------------------------" << std::endl;	
+	// float f = std::numeric_limits<float>::max();
+	// f = f * 2;
+	// ScalarConverter::convert(std::to_string(f));
+	// return 0;
+
 }

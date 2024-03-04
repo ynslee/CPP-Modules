@@ -30,7 +30,7 @@ void ScalarConverter::convert(std::string const &str){
 
 	// Conver to char
 	try {
-		c = std::stoi(str);
+		c = static_cast<char>(std::stoi(str);
 		if (str.length() != 1 && type == -1 && !isprint(c))
 		{
 			throw std::invalid_argument("Invalid input");
