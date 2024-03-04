@@ -5,32 +5,39 @@
 # include <string>
 # include <exception>
 # include <limits>
+# include <iomanip>
 
-
+	enum TYPE
+	{
+		CHAR,
+		PSEUDOINFNEG,
+		PSEUDOINFPOS,
+		PSEUDONAN,
+		FLOAT,
+		DOUBLE,
+		INT,
+		INVALID
+	};
+		
 /*static member function can be called even if no objects of the class exist*/
 class ScalarConverter {
 
 	private:
-		enum TYPE
-		{
-			CHAR,
-			INT,
-			FLOAT,
-			DOUBLE,
-			PSEUDOINFNEG,
-			PSEUDOINFPOS,
-			PSEUDONAN,
-			INVALID
-		};
-		
 		ScalarConverter();
 		ScalarConverter(const ScalarConverter &copy);
 		ScalarConverter &operator=(const ScalarConverter &src);
 		~ScalarConverter();
-		int getType(std::string const str);
-		
+
+
 	public:
-	static void	convert(std::string const &str);
+		static void	convert(std::string const &str);
+};
+
+class OverflowException : public std::exception {
+	public:
+		virtual const char* what() const throw() {
+			return "OverflowException: the value is too big to be stored in a variable";
+		}
 };
 
 #endif
