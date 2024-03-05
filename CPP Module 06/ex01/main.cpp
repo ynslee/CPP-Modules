@@ -9,15 +9,15 @@ int main(void)
 
 	data.secret = 42;
 
-	std::cout << ":data structure's address is: " << &data << std::endl;
+	std::cout << "Data structure's address is: " << &data << std::endl;
 
 	serialised = Serializer::serialize(&data);
-	std::cout << "Serialised data is: " << serialised << std::endl;
+	std::cout << "Serialised address is: " << serialised << std::endl;
 
 	deserialised = Serializer::deserialize(serialised);
-	std::cout << "Deserialised data is: " << deserialised << std::endl;
+	std::cout << "Deserialised address is: " << deserialised << std::endl;
 
-	std::cout << data.secret << std::endl;
+	std::cout << deserialised->secret << std::endl;
 
 	return (0);
 }
