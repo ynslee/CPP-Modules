@@ -1,14 +1,14 @@
 #pragma once
 
-#include <iostream>
-#include <string>
+# include <iostream>
+# include <string>
 
 struct Data
 {
 	int secret;
 };
 
-// reinterpret_cast <new_type> (expression) : used to cast a pointer of data type into a pointer of another data type.
+// reinterpret_cast <new_type> (expression) : used to cast a pointer of data type into a pointer of any other data type.
 class Serializer
 {
 
