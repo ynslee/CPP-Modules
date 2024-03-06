@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 	if (argc != 2){
 		std::cout << "Error: please type a parameter" << std::endl;
 		std::cout << "parameter type: char, int, float, double" << std::endl;
-		std::cout << "Example: ./convert 42" << std::endl;
+		std::cout << "Example: ./ScalarConverter 42" << std::endl;
 		return 1;
 	}
 	try {
@@ -21,24 +21,22 @@ int main(int argc, char **argv)
 		std::cout << "Error: invalid parameter" << std::endl;
 		std::cout << "please check if your input is correct. Did you check if it overflows?" << std::endl;
 	}
-
-	std::cout << "------------------------------" << std::endl;
-	std::cout << "---Integer overflow happened--" << std::endl;
-	std::cout << "------------------------------" << std::endl;	
-	float num = std::numeric_limits<int>::max();
-	num = num + 1;
-	ScalarConverter::convert(std::to_string(num));
-	std::cout << "------------------------------" << std::endl;
-	std::cout << "---Float overflow happened----" << std::endl;
-	std::cout << "------------------------------" << std::endl;	
-	float f = std::numeric_limits<float>::max();
-	f = f * 2;
-	try {
-	ScalarConverter::convert(std::to_string(f));
-	} catch (...)
-	{
-		std::cout << "Error: float overflow" << std::endl;
-	}
+	// std::cout << "------------------------------" << std::endl;
+	// std::cout << "---Integer overflow happened--" << std::endl;
+	// std::cout << "------------------------------" << std::endl;	
+	// float num = std::numeric_limits<int>::max();
+	// num = num + 1;
+	// ScalarConverter::convert(std::to_string(num));
+	// std::cout << "------------------------------" << std::endl;
+	// std::cout << "---Float overflow happened----" << std::endl;
+	// std::cout << "------------------------------" << std::endl;	
+	// float f = std::numeric_limits<float>::max();
+	// f = f * 2;
+	// try {
+	// 	ScalarConverter::convert(std::to_string(f));
+	// } catch (...)
+	// {
+	// 	std::cout << "Error: float overflow" << std::endl;
+	// }
 	return 0;
-
 }

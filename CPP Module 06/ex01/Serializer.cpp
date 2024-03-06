@@ -14,8 +14,11 @@ Serializer::Serializer(Serializer const& other) {
 }
 
 Serializer& Serializer::operator=(Serializer const& other) {
-	(void)other;
-	return (*this);
+
+	if (this == &other){	
+		static_cast<void>(other);
+	}	
+	return *this;
 }
 
 /**
@@ -24,10 +27,10 @@ Serializer& Serializer::operator=(Serializer const& other) {
  */
 uintptr_t Serializer::serialize(Data* ptr) {
 	uintptr_t serial = reinterpret_cast<uintptr_t>(ptr);
-	return (serial);
+	return serial;
 }
 
 Data* Serializer::deserialize(uintptr_t raw) {
 	Data* deserial = reinterpret_cast<Data *>(raw);
-	return (deserial);
+	return deserial;
 }

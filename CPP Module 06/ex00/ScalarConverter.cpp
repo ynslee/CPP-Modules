@@ -22,8 +22,9 @@ void ScalarConverter::convert(std::string const &str){
 	int type = -1;
 
 	bool integer_overflow = false;
+	bool c_impossible = false;
 
-	if (str.length() == 1 && std::isprint(str[0]) && std::isalpha(str[0]))
+	if (str.length() == 1 && (std::isprint(str[0]) || std::isalpha(str[0])))
 		type = CHAR;
 	else if (str.compare("+inf") == 0 || str.compare("+inff") == 0)
 		type = PSEUDOINFPOS;
@@ -99,19 +100,13 @@ void ScalarConverter::convert(std::string const &str){
 		f = static_cast<float>(c);
 		d = static_cast<double>(c);
 	}else if (type == INT){
-		// try {
-		// 	f = std::stoi(str);
-			// if (f > INT_MAX || f < INT_MIN)
-			// 	throw std::out_of_range("Invalid input. Can't convert to others");
-			// else
-				i = std::stoi(str);
-		// } catch(...) {
-		// 	std::cout << "Invalid input. Can't convert to others" << std::endl;
-		// 	return ;
-		// }
+		i = std::stoi(str);
 		f = static_cast<float>(i);
 		d = static_cast<double>(i);
-		c = static_cast<char>(i);
+		if (i >= 40 && i <= 176)
+			c = static_cast<char>(i);
+		else
+			c_impossible = true;
 	}else if (type == FLOAT){
 		f = std::stof(str);
 		if (f > std::numeric_limits<float>::max() || f < std::numeric_limits<float>::lowest())
@@ -120,7 +115,10 @@ void ScalarConverter::convert(std::string const &str){
 			integer_overflow = true;
 		i = static_cast<int>(f);
 		d = static_cast<double>(f);
-		c = static_cast<char>(f);
+		if (i >= 40 && i <= 176)
+			c = static_cast<char>(i);
+		else
+			c_impossible = true;
 	}else if (type == DOUBLE){
 		d = std::stod(str);
 		if (d > std::numeric_limits<double>::max() || d < std::numeric_limits<double>::lowest())
@@ -129,38 +127,43 @@ void ScalarConverter::convert(std::string const &str){
 			integer_overflow = true;
 		i = static_cast<int>(d);
 		f = static_cast<float>(d);
-		c = static_cast<char>(d);
+		if (i >= 40 && i <= 176)
+			c = static_cast<char>(i);
+		else
+			c_impossible = true;
 	}else if (type == PSEUDOINFPOS){
 		f = std::numeric_limits<float>::infinity();
 		d = std::numeric_limits<double>::infinity();
-		std::cout << "char: Impossible"	<< std::endl;
-		std::cout << "int: Impossible"	<< std::endl;
-		std::cout << "float: " << f		<< "f" << std::endl;
-		std::cout << "double: " << d		<< std::endl;
+		std::cout << "char: impossible"	<< std::endl;
+		std::cout << "int: impossible"	<< std::endl;
+		std::cout << "float: +" << f		<< "f" << std::endl;
+		std::cout << "double: +" << d		<< std::endl;
 		return ;
 	}else if (type == PSEUDOINFNEG){
 		f = -std::numeric_limits<float>::infinity();
 		d = -std::numeric_limits<double>::infinity();
-		std::cout << "char: Impossible"	<< std::endl;
-		std::cout << "int: Impossible"	<< std::endl;
+		std::cout << "char: impossible"	<< std::endl;
+		std::cout << "int: impossible"	<< std::endl;
 		std::cout << "float: " << f		<< "f" << std::endl;
 		std::cout << "double: " << d		<< std::endl;
 		return ;
 	}else if (type == PSEUDONAN){
 		f = std::numeric_limits<float>::quiet_NaN();
 		d = std::numeric_limits<double>::quiet_NaN();
-		std::cout << "char: Impossible"	<< std::endl;
-		std::cout << "int: Impossible"	<< std::endl;
+		std::cout << "char: impossible"	<< std::endl;
+		std::cout << "int: impossible"	<< std::endl;
 		std::cout << "float: " << f << "f" << std::endl;
 		std::cout << "double: "	<< d << std::endl;
 		return ;
 	}
 	if (!std::isprint(c))
 		std::cout << "char: Non displayable" << std::endl;
+	else if (c_impossible == true)
+		std::cout << "char: impossible" << std::endl;
 	else
 		std::cout << "char: " << c << std::endl;
 	if (integer_overflow == true)
-		std::cout << "int: Impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << i << std::endl;
 	std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;

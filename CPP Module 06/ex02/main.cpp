@@ -2,15 +2,16 @@
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
+#include <memory>
 
 Base* generate(void) {
 	int i = std::rand() % 3;
 	if (i == 0)
-		return (new A);
+		return new A;
 	else if (i == 1)
-		return (new B);
+		return new B;
 	else
-		return (new C);
+		return new C;
 }
 
 void identify(Base *p){
@@ -20,30 +21,33 @@ void identify(Base *p){
 		std::cout << "pointer as B" << std::endl;
 	else if (dynamic_cast<C *>(p))
 		std::cout << "pointer as C" << std::endl;
+	else
+		std::cout << "Invalid: it is not A, B or C" << std::endl;
 }
 
 void identify(Base &p){
 	A a;
 	B b;
 	C c;
+	int found = 0;
+
 	try{
 		a = dynamic_cast<A &>(p);
+		found = 1;
 		std::cout << "reference as A" << std::endl;
-	} catch (...) {
-		std::cout << "it is not A" << std::endl;
-	}
+	} catch (...) {}
 	try{
 		b = dynamic_cast<B &>(p);
+		found = 1;
 		std::cout << "reference as B" << std::endl;
-	} catch (...) {
-		std::cout << "it is not B" << std::endl;
-	}
+	} catch (...) {}
 	try{
 		c = dynamic_cast<C &>(p);
+		found = 1;
 		std::cout << "reference as C" << std::endl;
-	} catch (...) {
-		std::cout << "it is not C" << std::endl;
-	}
+	} catch (...) {}
+	if (!found)
+		std::cout << "Invalid: it is not A, B or C" << std::endl;
 	return ;
 }
 
@@ -51,27 +55,31 @@ int main(void)
 {
 	std::srand(std::time(0));
 
-	std::cout << "---------randomly generated---------" << std::endl;
-	Base *random = generate();
+	{
+		std::cout << "---------randomly generated---------" << std::endl;
+		Base *random = generate();
 
-	identify(random);
-	std::cout << "identified by pointer" << std::endl;
+		std::cout << "identified by pointer---" << std::endl;
+		identify(random);
 
-	identify(*random);
-	std::cout << "identified by reference" << std::endl;
+		std::cout << "\nidentified by reference---" << std::endl;
+		identify(*random);
 
-	delete random;
+		delete random;
+	}
 
-	std::cout << "---------Downcasting---------" << std::endl;
-	Base *what = new B;
+	{
+		std::cout << "\n---------Downcasting---------" << std::endl;
+		Base *what = new B;
 
-	identify(what);
-	std::cout << "identified by pointer" << std::endl;
+		std::cout << "identified by pointer---" << std::endl;
+		identify(what);
 
-	identify(*what);
-	std::cout << "identified by reference" << std::endl;
+		std::cout << "\nidentified by reference---" << std::endl;
+		identify(*what);
 
-	delete what;
+		delete what;
+	}
 
-	return (0);
+	return 0;
 }
