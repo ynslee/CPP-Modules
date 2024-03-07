@@ -20,7 +20,7 @@ int main(void) {
 	if (::min(a, b) == a)
 		std::cerr << "\033[33mTEST FAIL\033[0m" << std::endl;
 	else
-		std::cout << "\033[32mTEST OKAY\033[0m" << " ::min is " << ::min(a, b) << std::endl;
+		std::cout << "\033[32mTEST OKAY\033[0m" << "min is " << ::min(a, b) << std::endl;
 	if (::min(c, d) == d)
 		std::cerr << "\033[33mTEST FAIL\033[0m" << std::endl;
 	else
@@ -92,5 +92,39 @@ int main(void) {
 // 	std::cout << "c = " << c << ", d = " << d << std::endl;
 // 	std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
 // 	std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
+// 	return 0;
+// }
+
+// class Awesome
+// {
+// 	public:
+// 		Awesome(void): _n(0) {}
+// 		Awesome(int n): _n(n) {}
+
+// 		Awesome& operator=(Awesome& a) { _n = a._n; return *this; }
+
+// 		bool operator==(Awesome const& rhs) const { return (this->_n == rhs._n); }
+// 		bool operator!=(Awesome const& rhs) const { return (this->_n != rhs._n); }
+// 		bool operator>(Awesome const& rhs) const { return (this->_n > rhs._n); }
+// 		bool operator<(Awesome const& rhs) const { return (this->_n < rhs._n); }
+// 		bool operator>=(Awesome const& rhs) const { return (this->_n >= rhs._n); }
+// 		bool operator<=(Awesome const& rhs) const { return (this->_n <= rhs._n); }
+
+// 		int get_n() const { return _n; }
+// 	private:
+// 		int _n;
+// };
+
+// std::ostream& operator<<(std::ostream& out, const Awesome& a) { out << a.get_n(); return out; }
+
+// int main(void)
+// {
+// 	std::cout << "- TEST COMPLEX CLASS -" << std::endl;
+// 	Awesome a(2), b(4);
+
+// 	swap(a, b);
+// 	std::cout << a << " " << b << std::endl;
+// 	std::cout << max(a, b) << std::endl;
+// 	std::cout << min(a, b) << std::endl;
 // 	return 0;
 // }
