@@ -1,5 +1,5 @@
 NAME = itertemplates
-FLAGS = -std=c++14 -Wall -Wextra -Werror
+FLAGS =  -Wall -Wextra -Werror
 SRCS = main.cpp
 OBJ = $(SRCS:.cpp=.o)
 
