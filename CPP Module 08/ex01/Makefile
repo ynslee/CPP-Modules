@@ -1,6 +1,6 @@
-NAME = funtemplates
+NAME = FindtheSpan
 FLAGS = -std=c++17 -Wall -Wextra -Werror
-SRCS = main.cpp
+SRCS = main.cpp Span.cpp
 OBJ = $(SRCS:.cpp=.o)
 
 .PHONY: all clean fclean re
