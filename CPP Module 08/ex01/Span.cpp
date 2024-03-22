@@ -1,6 +1,7 @@
 #include "Span.hpp"
 #include <iostream>
-#include <time.h>
+#include <random>
+#include <ctime>
 
 Span::Span() {}
 
@@ -69,10 +70,15 @@ void Span::fillVector(unsigned int amount) {
 	if (currentSize + amount > _N) {
 		throw Span::CantAddNewException();
 	}
-	_vec.resize(_vec.size() + amount);
-	srand(time(NULL));
-	for (unsigned int i = currentSize; i < _vec.size(); i++) {
-		_vec[i] = rand();
+	unsigned int size = currentSize + amount;
+	std::srand(time(NULL));
+	for (unsigned int i = currentSize; i < size; i++) {
+		_vec.push_back(std::rand() % 10000);
 	}
+	// std::cout << "vector is now: ";
+	// for (unsigned int i = 0; i < _vec.size(); i++) {
+	// 	std::cout << _vec[i] << " ";
+	// }
+	// std::cout << std::endl;
 	return ;
 }
