@@ -1,4 +1,4 @@
-NAME = funtemplates
+NAME = MutantStack
 FLAGS = -std=c++17 -Wall -Wextra -Werror
 SRCS = main.cpp
 OBJ = $(SRCS:.cpp=.o)
