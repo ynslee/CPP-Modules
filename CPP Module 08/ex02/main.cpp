@@ -66,6 +66,16 @@ int main()
 		++it4;
 	}
 	std::cout << std::endl;
+	const MutantStack<int> constStack(mstack);
+	std::cout << "const mutant stack is: ";
+	MutantStack<int>::const_iterator it5 = constStack.cbegin();
+	MutantStack<int>::const_iterator ite5 = constStack.cend();
+	while (it5 != ite5)
+	{
+		std::cout << *it5;
+		++it5;
+	}
+	std::cout << std::endl;
 	return 0;
 }
 
