@@ -14,6 +14,8 @@ class Bitcoin{
 		Bitcoin (std::string filename);
 		~Bitcoin();
 		int validate_data();
+		int inputFileParsing(std::string filename);
+		void calculateAndPrint(std::string date, double value);
 
 
 	class WrongValueException : public std::exception {
