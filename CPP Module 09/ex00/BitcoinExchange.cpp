@@ -13,6 +13,15 @@ Bitcoin::Bitcoin(std::string filename) {
 		return ;
 }
 
+Bitcoin::Bitcoin(Bitcoin const &other) {
+	*this = other;
+}
+
+Bitcoin	&Bitcoin::operator=(Bitcoin const &other){
+	this->_data = other._data;
+	return (*this);
+}
+
 Bitcoin::~Bitcoin(){};
 
 static bool isLeapYear(int year) {
