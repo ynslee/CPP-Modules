@@ -7,26 +7,30 @@ Bitcoin::Bitcoin(std::string filename) {
 	if (validate_data() == -1)
 	{
 		std::cerr << "input data cannot be opened or datas are incorrect" << std::endl;
-		exit(1);
+		throw WrongValueException();
 	}
 	if (inputFileParsing(filename) == -1)
-	{
-		std::cerr << "input data cannot be opened or datas are incorrect" << std::endl;
-		exit(1);
-	}
+		return ;
 }
 
 Bitcoin::~Bitcoin(){};
 
-static bool isValidDate(const std::string &date){
+static bool isLeapYear(int year) {
+	return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+}
+
+static int isValidDate(const std::string &date){
 	std::tm  tm = {};
 	std::istringstream ss(date);
 	ss >> std::get_time(&tm, "%Y-%m-%d");
 	if (ss.fail() || !ss.eof())
-	{
-		std::cerr << "Date is incorrect in the data.csv" << std::endl;
 		return (-1);
-	}
+	int daysMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	if (isLeapYear(tm.tm_year + 1900))
+		daysMonth[1] = 29;
+	if (tm.tm_mon < 0 || tm.tm_mon > 11 || tm.tm_mday < 1 || tm.tm_mday > daysMonth[tm.tm_mon])
+        return (-1);
+	return (0);
 }
 
 int Bitcoin::validate_data(){
@@ -56,7 +60,7 @@ int Bitcoin::validate_data(){
 			file.close();
 			return (-1);
 		}
-		double value;
+		long double value;
 		try{
 			value = std::stod(line.substr(pos + 1));
 		} catch (std::exception &e){
@@ -72,12 +76,13 @@ int Bitcoin::validate_data(){
 		std::cerr << "file is empty" << std::endl;
 		return (-1);
 	}
+	return (0);
 }
 
 int Bitcoin::inputFileParsing(std::string fileName)
 {
 	std::string date;
-	double value;
+	long double value;
 
 	std::string line;
 	std::ifstream file(fileName.c_str());
@@ -86,7 +91,7 @@ int Bitcoin::inputFileParsing(std::string fileName)
 		std::cerr << "cannot open the file!" << std::endl;
 		return(-1);
 	}
-	getline(file, line);
+	std::getline(file, line);
 	if (line != "date | value")
 	{
 		std::cerr << "input file does not following format: 'date | value' " << std::endl;
@@ -94,13 +99,10 @@ int Bitcoin::inputFileParsing(std::string fileName)
 		return (-1);
 	}
 	int i = 0;
-	while (getline(file, line))
+	while (std::getline(file, line))
 	{
 		if (i == 0)
-		{
 			i = 1;
-			continue;
-		}
 		if (line.length() <= 13)
 		{
 			std::cout << "Error : bad input => " << line << std::endl;
@@ -116,7 +118,7 @@ int Bitcoin::inputFileParsing(std::string fileName)
 				continue ;
 			}
 			std::string strValue = line.substr(pos + 2);
-			double value;
+			value = 0;
 			try{
 				value = std::stod(strValue);
 			} catch (std::exception &e){
@@ -129,9 +131,9 @@ int Bitcoin::inputFileParsing(std::string fileName)
 				std::cerr << "Error : not a positive number." << std::endl;
 				continue ;
 			}
-			else if (static_cast<int>(value) > INT_MAX || static_cast<int>(value) < INT_MIN)
+			if (value > static_cast<long double>(1000))
 			{
-				std::cerr << "Error: too larget a number." << std::endl;
+				std::cerr << "Error: too large a number." << std::endl;
 				continue ;
 			}
 			calculateAndPrint(date, value);
@@ -142,8 +144,14 @@ int Bitcoin::inputFileParsing(std::string fileName)
 		std::cerr << "file is empty" << std::endl;
 		return (-1);
 	}
+	return (0);
 }
 
-void Bitcoin::calculateAndPrint(std::string date, double value){
+void Bitcoin::calculateAndPrint(std::string date, long double value){
 	
+	std::map<std::string, long double>::iterator itlow;
+
+	itlow = _data.lower_bound(date);
+	long double rate = itlow->second;
+	std::cout << date << " => " << value << " = " << rate * value << std::endl;
 }

@@ -5,7 +5,7 @@
 
 class Bitcoin{
 	private:
-		std::map<std::string, double> _data;
+		std::map<std::string, long double> _data;
 		Bitcoin();
 		Bitcoin(Bitcoin const &other);
 		Bitcoin &operator=(Bitcoin const &other);
@@ -15,7 +15,7 @@ class Bitcoin{
 		~Bitcoin();
 		int validate_data();
 		int inputFileParsing(std::string filename);
-		void calculateAndPrint(std::string date, double value);
+		void calculateAndPrint(std::string date, long double value);
 
 
 	class WrongValueException : public std::exception {
