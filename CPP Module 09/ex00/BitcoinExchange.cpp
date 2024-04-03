@@ -18,7 +18,7 @@ Bitcoin::Bitcoin(Bitcoin const &other) {
 }
 
 Bitcoin	&Bitcoin::operator=(Bitcoin const &other){
-	this->_data = other._data;
+	_data = other._data;
 	return (*this);
 }
 
