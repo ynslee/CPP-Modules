@@ -5,6 +5,14 @@
 #include <chrono>
 #include <utility>
 
+void print_vpairs(std::vector<std::pair<int, int>> & arr){
+    int size = arr.size();
+
+    for (int i = 0; i < size; i++){
+        std::cout << arr[i].first << " " << arr[i].second << std::endl;
+    }
+}
+
 static void merge(std::vector<std::pair<int, int>> & arr, int l, int m, int r) {
     int i, j, k;
     int leftHalf = m - l + 1;
@@ -29,7 +37,7 @@ static void merge(std::vector<std::pair<int, int>> & arr, int l, int m, int r) {
     j = 0; // Initial index of second subarray
     k = l; // Initial index of merged subarray
     while (i < leftHalf && j < rightHalf) {
-        if (L[i].first >= R[j].first) {
+        if (L[i].first <= R[j].first) {
             arr[k] = L[i];
             i++;
         } else {
@@ -53,7 +61,6 @@ static void merge(std::vector<std::pair<int, int>> & arr, int l, int m, int r) {
         k++;
     }
 }
-      
 
 static void mergesort(std::vector<std::pair<int, int>> &pairs, int l, int r)
 {
@@ -67,7 +74,6 @@ static void mergesort(std::vector<std::pair<int, int>> &pairs, int l, int r)
     else
         return;
 }
-
 
 static void mergeInsertSort(std::vector<int> &arr){
 
@@ -99,9 +105,19 @@ static void mergeInsertSort(std::vector<int> &arr){
     // for (int i = 0; i < pairSize; i++)
     //     std::cout << pairs[i].first << " " << pairs[i].second << std::endl;
     mergesort(pairs, 0, pairs.size() - 1);
+    // for (int i = 0; i < pairSize; i++)
+    //     std::cout << pairs[i].first << " " << pairs[i].second << std::endl;
+    arr.clear();
+    std::vector<int> temp;
     for (int i = 0; i < pairSize; i++)
-        std::cout << pairs[i].first << " " << pairs[i].second << std::endl;
-
+    {
+        arr.push_back(pairs[i].first);
+        temp.push_back(pairs[i].second);
+    }
+    for (size_t i = 0; i < arr.size(); i++)
+        std::cout << "arr is " << arr[i] << std::endl;
+    for (size_t i = 0; i < temp.size(); i++)
+        std::cout << "temp is " << temp[i] << std::endl;
 }
 
 PmergeMe::PmergeMe(std::stringstream &ss){
