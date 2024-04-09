@@ -13,7 +13,6 @@ void print_vpairs(std::vector<std::pair<int, int>> & arr){
     }
 }
 
-
 template <typename T>
 static void insertionSort(T &arr, int n)
 {
@@ -35,18 +34,10 @@ static void mergeVector(std::vector<std::pair<int, int>> & arr, int l, int m, in
     std::vector<std::pair<int, int>> L(leftHalf);
     std::vector<std::pair<int, int>> R(rightHalf);
 
-    // std::cout << "l is " << l << ", m is " << m << ", r is " << r << std::endl;
-    // std::cout << "leftHalf is " << leftHalf << std::endl;
-    // std::cout << "rightHalf is " << rightHalf << std::endl;
-
     for (i = 0; i < leftHalf; i++)
         L[i] = arr[l + i];
-    // for (size_t s = 0; s < L.size(); s++)
-    //     std::cout << "left: " << L[i].first << " " << L[i].second << std::endl;
     for (j = 0; j < rightHalf; j++)
         R[j] = arr[m + 1 + j];
-    // for (size_t s = 0; s < R.size(); s++)
-    //     std::cout << "right: " << R[i].first << " " << R[i].second << std::endl;
 
     i = 0; // Initial index of first subarray
     j = 0; // Initial index of second subarray
@@ -61,15 +52,11 @@ static void mergeVector(std::vector<std::pair<int, int>> & arr, int l, int m, in
         }
         k++;
     }
-
-    // Copy the remaining elements of L[], if there are any
     while (i < leftHalf) {
         arr[k] = L[i];
         i++;
         k++;
     }
-
-    // Copy the remaining elements of R[], if there are any
     while (j < rightHalf) {
         arr[k] = R[j];
         j++;
@@ -81,26 +68,12 @@ static void mergeSortVector(std::vector<std::pair<int, int>> &pairs, int l, int 
 {
     if (l < r){
         int m = l + (r - l) / 2;
-        // std::cout << "m is " << m << std::endl;
         mergeSortVector(pairs, l, m);
         mergeSortVector(pairs, m + 1, r);
         mergeVector(pairs, l, m, r);
     }
     else
         return;
-}
-
-void insertionSortVec(std::vector<int> &arr, int n)
-{
-    int size = arr.size();
-    int j = 0;
-
-    for (j = size - 2; j >= 0; j--)
-    {
-        if (arr[j] < n && arr[j + 1] > n)
-            break;
-    }
-    arr.insert(arr.begin() + j + 1, n);
 }
 
 void mergeInsertSortVector(std::vector<int> &arr){
@@ -117,17 +90,14 @@ void mergeInsertSortVector(std::vector<int> &arr){
             arr[i + 1] = temp;
         }
     }
-    std::cout << arr.size() << std::endl;
     int pairSize;
     std::vector<int> temp;
     if (size % 2)
     {
-        std::cout << "last one is " << arr[size - 1] << std::endl;
         odd = arr[size - 1];
         arr.erase(arr.end() - 1);
     }
     pairSize = size / 2;
-    std::cout << "pair size is " << pairSize << std::endl;
     std::vector<std::pair<int, int>> pairs;
     for (int i = 0; i < size - 1; i+=2)
     {
@@ -135,11 +105,7 @@ void mergeInsertSortVector(std::vector<int> &arr){
         int num2 = arr[i + 1];
         pairs.push_back(std::make_pair(num1, num2));
     }
-    // for (int i = 0; i < pairSize; i++)
-    //     std::cout << pairs[i].first << " " << pairs[i].second << std::endl;
     mergeSortVector(pairs, 0, pairs.size() - 1);
-    // for (int i = 0; i < pairSize; i++)
-    //     std::cout << pairs[i].first << " " << pairs[i].second << std::endl;
     arr.clear();
     for (int i = 0; i < pairSize; i++)
     {
@@ -148,10 +114,6 @@ void mergeInsertSortVector(std::vector<int> &arr){
     }
     if (odd >= 0)
         temp.push_back(odd);
-    // for (size_t i = 0; i < arr.size(); i++)
-    //     std::cout << "arr is " << arr[i] << std::endl;
-    // for (size_t i = 0; i < temp.size(); i++)
-    //     std::cout << "temp is " << temp[i] << std::endl;
     arr.insert(arr.begin(), temp[0]);
     temp.erase(temp.begin());
     for (size_t i = 0; i < temp.size(); i++)
@@ -165,18 +127,10 @@ static void mergeDeque(std::deque<std::pair<int, int>> & arr, int l, int m, int 
     std::deque<std::pair<int, int>> L(leftHalf);
     std::deque<std::pair<int, int>> R(rightHalf);
 
-    // std::cout << "l is " << l << ", m is " << m << ", r is " << r << std::endl;
-    // std::cout << "leftHalf is " << leftHalf << std::endl;
-    // std::cout << "rightHalf is " << rightHalf << std::endl;
-
     for (i = 0; i < leftHalf; i++)
         L[i] = arr[l + i];
-    // for (size_t s = 0; s < L.size(); s++)
-    //     std::cout << "left: " << L[i].first << " " << L[i].second << std::endl;
     for (j = 0; j < rightHalf; j++)
         R[j] = arr[m + 1 + j];
-    // for (size_t s = 0; s < R.size(); s++)
-    //     std::cout << "right: " << R[i].first << " " << R[i].second << std::endl;
 
     i = 0; // Initial index of first subarray
     j = 0; // Initial index of second subarray
@@ -191,15 +145,11 @@ static void mergeDeque(std::deque<std::pair<int, int>> & arr, int l, int m, int 
         }
         k++;
     }
-
-    // Copy the remaining elements of L[], if there are any
     while (i < leftHalf) {
         arr[k] = L[i];
         i++;
         k++;
     }
-
-    // Copy the remaining elements of R[], if there are any
     while (j < rightHalf) {
         arr[k] = R[j];
         j++;
@@ -211,7 +161,6 @@ static void mergeSortDeque(std::deque<std::pair<int, int>> &pairs, int l, int r)
 {
     if (l < r){
         int m = l + (r - l) / 2;
-        // std::cout << "m is " << m << std::endl;
         mergeSortDeque(pairs, l, m);
         mergeSortDeque(pairs, m + 1, r);
         mergeDeque(pairs, l, m, r);
@@ -234,17 +183,14 @@ static void mergeInsertSortDeque(std::deque<int> &arr){
             arr[i + 1] = temp;
         }
     }
-    std::cout << arr.size() << std::endl;
     int pairSize;
     std::deque<int> temp;
     if (size % 2)
     {
-        std::cout << "last one is " << arr[size - 1] << std::endl;
         odd = arr[size - 1];
         arr.erase(arr.end() - 1);
     }
     pairSize = size / 2;
-    std::cout << "pair size is " << pairSize << std::endl;
     std::deque<std::pair<int, int>> pairs;
     for (int i = 0; i < size - 1; i+=2)
     {
@@ -252,11 +198,7 @@ static void mergeInsertSortDeque(std::deque<int> &arr){
         int num2 = arr[i + 1];
         pairs.push_back(std::make_pair(num1, num2));
     }
-    // for (int i = 0; i < pairSize; i++)
-    //     std::cout << pairs[i].first << " " << pairs[i].second << std::endl;
     mergeSortDeque(pairs, 0, pairs.size() - 1);
-    // for (int i = 0; i < pairSize; i++)
-    //     std::cout << pairs[i].first << " " << pairs[i].second << std::endl;
     arr.clear();
     for (int i = 0; i < pairSize; i++)
     {
@@ -265,10 +207,6 @@ static void mergeInsertSortDeque(std::deque<int> &arr){
     }
     if (odd >= 0)
         temp.push_back(odd);
-    // for (size_t i = 0; i < arr.size(); i++)
-    //     std::cout << "arr is " << arr[i] << std::endl;
-    // for (size_t i = 0; i < temp.size(); i++)
-    //     std::cout << "temp is " << temp[i] << std::endl;
     arr.insert(arr.begin(), temp[0]);
     temp.erase(temp.begin());
     for (size_t i = 0; i < temp.size(); i++)
@@ -302,12 +240,22 @@ PmergeMe::PmergeMe(std::stringstream &ss){
     end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::micro> deqTime = end - start;
 
+    if (vec.size() != deq.size())
+    {
+        std::cout << "FAIL: result is not matching" << std::endl;
+        return ;
+    }
     std::cout << "After: ";
-    for (int i : vec) std::cout << i << " ";
-    std::cout << std::endl;
-
-    std::cout << "After: ";
-    for (int i : deq) std::cout << i << " ";
+    int size = vec.size();
+    for (int i = 0; i < size; i++){
+        if (vec[i] == deq[i])
+            std::cout << vec[i] << " ";
+        else
+        {
+            std::cout << "FAIL" << std::endl;
+            return;
+        }
+    }
     std::cout << std::endl;
 
     std::cout << "Time to process a range of " << vec.size() << " elements with std::vector: " << vecTime.count() << " us" << std::endl;
