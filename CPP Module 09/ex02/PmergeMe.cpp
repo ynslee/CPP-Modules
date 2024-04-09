@@ -106,6 +106,7 @@ void mergeInsertSortVector(std::vector<int> &arr){
         pairs.push_back(std::make_pair(num1, num2));
     }
     mergeSortVector(pairs, 0, pairs.size() - 1);
+    print_vpairs(pairs);
     arr.clear();
     for (int i = 0; i < pairSize; i++)
     {
@@ -114,6 +115,16 @@ void mergeInsertSortVector(std::vector<int> &arr){
     }
     if (odd >= 0)
         temp.push_back(odd);
+    std::cout << "arr is ";
+    for (int i: arr){
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
+    std::cout << "temp is ";
+    for (int i: temp){
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
     arr.insert(arr.begin(), temp[0]);
     temp.erase(temp.begin());
     for (size_t i = 0; i < temp.size(); i++)
