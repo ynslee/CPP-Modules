@@ -1,5 +1,5 @@
 NAME = PmergeMe
-FLAGS = -std=c++17 -Wall -Wextra -Werror
+FLAGS = -std=c++17 -Wall -Wextra -Werror -g #-fsanitize=address,undefined
 SRCS = main.cpp PmergeMe.cpp
 OBJ = $(SRCS:.cpp=.o)
 

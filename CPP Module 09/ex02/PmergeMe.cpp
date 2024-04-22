@@ -5,26 +5,14 @@
 #include <chrono>
 #include <utility>
 
-void print_vpairs(std::vector<std::pair<int, int>> & arr){
-    int size = arr.size();
-
-    for (int i = 0; i < size; i++){
-        std::cout << arr[i].first << " " << arr[i].second << std::endl;
-    }
-}
-
-template <typename T>
-static void insertionSort(T &arr, int n)
+template <template <typename...> class Container>
+static void	insertionSort(Container<int> &large, Container<int> small)
 {
-    int size = arr.size();
-    int j = 0;
-
-    for (j = size - 2; j >= 0; j--)
-    {
-        if (arr[j] < n && arr[j + 1] > n)
-            break;
-    }
-    arr.insert(arr.begin() + j + 1, n);
+	for (typename Container<int>::iterator it = small.begin(); it != small.end(); ++it)
+	{
+		typename Container<int>::iterator pos = std::lower_bound(large.begin(), large.end(), *it);
+		large.insert(pos, *it);
+	}
 }
 
 static void mergeVector(std::vector<std::pair<int, int>> & arr, int l, int m, int r) {
@@ -76,7 +64,7 @@ static void mergeSortVector(std::vector<std::pair<int, int>> &pairs, int l, int 
         return;
 }
 
-void mergeInsertSortVector(std::vector<int> &arr){
+static void mergeInsertSortVector(std::vector<int> &arr){
 
     int odd = -1;
     if (arr.size() == 1)
@@ -106,7 +94,6 @@ void mergeInsertSortVector(std::vector<int> &arr){
         pairs.push_back(std::make_pair(num1, num2));
     }
     mergeSortVector(pairs, 0, pairs.size() - 1);
-    print_vpairs(pairs);
     arr.clear();
     for (int i = 0; i < pairSize; i++)
     {
@@ -115,20 +102,9 @@ void mergeInsertSortVector(std::vector<int> &arr){
     }
     if (odd >= 0)
         temp.push_back(odd);
-    std::cout << "arr is ";
-    for (int i: arr){
-        std::cout << i << " ";
-    }
-    std::cout << std::endl;
-    std::cout << "temp is ";
-    for (int i: temp){
-        std::cout << i << " ";
-    }
-    std::cout << std::endl;
     arr.insert(arr.begin(), temp[0]);
     temp.erase(temp.begin());
-    for (size_t i = 0; i < temp.size(); i++)
-        insertionSort(arr, temp[i]);
+    insertionSort(arr, temp);
 }
 
 static void mergeDeque(std::deque<std::pair<int, int>> & arr, int l, int m, int r) {
@@ -220,8 +196,7 @@ static void mergeInsertSortDeque(std::deque<int> &arr){
         temp.push_back(odd);
     arr.insert(arr.begin(), temp[0]);
     temp.erase(temp.begin());
-    for (size_t i = 0; i < temp.size(); i++)
-        insertionSort(arr, temp[i]);
+    insertionSort(arr, temp);
 }
  
 PmergeMe::PmergeMe(std::stringstream &ss){
@@ -259,7 +234,9 @@ PmergeMe::PmergeMe(std::stringstream &ss){
     std::cout << "After: ";
     int size = vec.size();
     for (int i = 0; i < size; i++){
-        if (vec[i] == deq[i])
+        if (vec[i] == deq[i] && i < size - 1 && vec[i] <= vec[i + 1] && deq[i] <= deq[i + 1])
+            std::cout << vec[i] << " ";
+        else if (vec[i] == deq[i] && i == size - 1 && vec[i] >= vec[i - 1] && deq[i] >= deq[i - 1])
             std::cout << vec[i] << " ";
         else
         {

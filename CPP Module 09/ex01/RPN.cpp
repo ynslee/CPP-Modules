@@ -28,6 +28,11 @@ RPN::RPN(std::string arg){
 					numbers.push(num * num2);
 					break;
 				case '/':
+					if (num2 == 0)
+					{
+						std::cerr << "Error: can't divide number by zero" << std::endl;
+						return;
+					}
 					numbers.push(num / num2);
 					break;
 			}

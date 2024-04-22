@@ -69,7 +69,7 @@ int Bitcoin::validate_data(){
 			file.close();
 			return (-1);
 		}
-		long double value;
+		double value;
 		try{
 			value = std::stod(line.substr(pos + 1));
 		} catch (std::exception &e){
@@ -91,7 +91,7 @@ int Bitcoin::validate_data(){
 int Bitcoin::inputFileParsing(std::string fileName)
 {
 	std::string date;
-	long double value;
+	double value;
 
 	std::string line;
 	std::ifstream file(fileName.c_str());
@@ -140,14 +140,22 @@ int Bitcoin::inputFileParsing(std::string fileName)
 				std::cerr << "Error : not a positive number." << std::endl;
 				continue ;
 			}
-			if (value > static_cast<long double>(1000))
+			if (value > static_cast<double>(1000))
 			{
 				std::cerr << "Error: too large a number." << std::endl;
 				continue ;
 			}
-			calculateAndPrint(date, value);
+			try{
+				calculateAndPrint(date, value);
+			}
+			catch (std::exception &e){
+				(void) e;
+				std::cerr << "Error: too large a number." << std::endl;
+				continue ;
+			}
 		}
 	}
+	file.close();
 	if (i == 0)
 	{
 		std::cerr << "file is empty" << std::endl;
@@ -156,11 +164,28 @@ int Bitcoin::inputFileParsing(std::string fileName)
 	return (0);
 }
 
-void Bitcoin::calculateAndPrint(std::string date, long double value){
+void Bitcoin::calculateAndPrint(std::string date, double value){
 	
-	std::map<std::string, long double>::iterator itlow;
+	std::map<std::string, double>::iterator itlow;
 
 	itlow = _data.lower_bound(date);
-	long double rate = itlow->second;
-	std::cout << date << " => " << value << " = " << rate * value << std::endl;
+	double rate = itlow->second;
+	if (itlow->first == date)
+	{
+		if (static_cast<int>(rate * value) > INT_MAX || static_cast<int>(rate * value) < INT_MIN)
+			throw WrongValueException();
+		std::cout << date << " => " << value << " = " << std::fixed << std::setprecision(2)<< rate * value << std::endl;
+	}
+	else {
+		if (itlow == _data.begin())
+		{
+			std::cerr << "Error: no earlier date exists in data.csv => " << itlow->first << std::endl;
+			return ;
+		}
+		itlow--;
+		rate = itlow->second;
+		if (static_cast<int>(rate * value) > INT_MAX || static_cast<int>(rate * value) < INT_MIN)
+			throw WrongValueException();
+		std::cout << date << " => " << value << " = " << std::fixed << std::setprecision(2) << rate * value << std::endl;
+	}
 }
