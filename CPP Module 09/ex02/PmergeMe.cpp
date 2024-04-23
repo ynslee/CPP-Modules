@@ -6,13 +6,20 @@
 #include <utility>
 
 template <template <typename...> class Container>
-static void	insertionSort(Container<int> &large, Container<int> small)
+static void	insertionSort(Container<int> &large, int x)
 {
-	for (typename Container<int>::iterator it = small.begin(); it != small.end(); ++it)
+    int left = 0;
+    int right = large.size() - 1;
+
+	while(left <= right)
 	{
-		typename Container<int>::iterator pos = std::lower_bound(large.begin(), large.end(), *it);
-		large.insert(pos, *it);
+        int mid = left + (right - left) / 2;
+        if (large[mid] < x)
+            left = mid + 1;
+        else
+            right = mid - 1;
 	}
+    large.insert(large.begin() + left, x);
 }
 
 static void mergeVector(std::vector<std::pair<int, int>> & arr, int l, int m, int r) {
@@ -104,7 +111,8 @@ static void mergeInsertSortVector(std::vector<int> &arr){
         temp.push_back(odd);
     arr.insert(arr.begin(), temp[0]);
     temp.erase(temp.begin());
-    insertionSort(arr, temp);
+    for (int x = temp.size() - 1; x >= 0; x--)
+        insertionSort(arr, temp[x]);
 }
 
 static void mergeDeque(std::deque<std::pair<int, int>> & arr, int l, int m, int r) {
@@ -196,7 +204,8 @@ static void mergeInsertSortDeque(std::deque<int> &arr){
         temp.push_back(odd);
     arr.insert(arr.begin(), temp[0]);
     temp.erase(temp.begin());
-    insertionSort(arr, temp);
+    for (int x = temp.size() - 1; x >= 0; x--)
+        insertionSort(arr, temp[x]);
 }
  
 PmergeMe::PmergeMe(std::stringstream &ss){
